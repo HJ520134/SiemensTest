@@ -1,42 +1,70 @@
 .toolbar {
   display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.button {
-  padding: 6px 16px;
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
   font-size: 13px;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  background: #fff;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s ease;
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
 }
 
-.button:hover:not(:disabled) {
-  border-color: #1890ff;
-  color: #1890ff;
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--primary-50);
 }
 
-.button:disabled {
-  color: #d9d9d9;
-  background: #f5f5f5;
+.btn:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
-.buttonPrimary {
-  background: #1890ff;
+.btnPrimary {
   color: #fff;
-  border-color: #1890ff;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-xs);
 }
 
-.buttonPrimary:hover:not(:disabled) {
-  background: #40a9ff;
-  border-color: #40a9ff;
+.btnPrimary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
-.buttonDanger:hover:not(:disabled) {
-  border-color: #ff4d4f;
-  color: #ff4d4f;
+.btnPrimary:active {
+  transform: scale(0.98);
+}
+
+.btnDanger {
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+.btnDanger:hover:not(:disabled) {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-light);
+}
+
+.btnDanger:active:not(:disabled) {
+  transform: scale(0.98);
 }

@@ -1,70 +1,146 @@
 .cell {
   position: relative;
-  padding: 4px 8px;
-  min-width: 80px;
-  min-height: 28px;
-  cursor: default;
-  border: 1px solid transparent;
-  border-radius: 2px;
+  padding: 9px 12px;
   font-size: 13px;
-  line-height: 20px;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+  vertical-align: middle;
 }
 
-.cell:hover {
-  background: #f5f5f5;
+.cell:first-child {
+  padding-left: 20px;
 }
 
+.cell:last-child {
+  padding-right: 20px;
+  border-right: none;
+}
+
+/* Index column */
+.cellIndex {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+}
+
+/* Editable cells */
+.cellEditable {
+  color: var(--text);
+  cursor: cell;
+}
+
+.cellEditable:hover {
+  background: var(--primary-50);
+}
+
+/* Editing state */
 .editing {
   padding: 0;
-  background: #fff;
-  border: 2px solid #1890ff;
+  background: var(--bg-card);
+  box-shadow: inset 0 0 0 2px var(--primary);
+  border-radius: var(--radius-sm);
 }
 
+.editing:first-child {
+  padding-left: 0;
+}
+
+.editing:last-child {
+  padding-right: 0;
+}
+
+/* Input field */
 .input {
   width: 100%;
-  padding: 2px 6px;
+  height: 34px;
+  padding: 0 10px;
   font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
   border: none;
   outline: none;
   background: transparent;
-  box-sizing: border-box;
+  border-radius: var(--radius-sm);
 }
 
+.input::selection {
+  background: var(--primary-100);
+  color: var(--text);
+}
+
+/* Select dropdown */
 .select {
   width: 100%;
-  padding: 2px 4px;
+  height: 34px;
+  padding: 0 8px;
   font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
   border: none;
   outline: none;
   background: transparent;
   cursor: pointer;
+  border-radius: var(--radius-sm);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
 }
 
+/* Error state */
 .cellError {
-  border-color: #ff4d4f;
-  background: #fff2f0;
+  box-shadow: inset 0 0 0 2px var(--danger);
+  background: var(--danger-light);
+  animation: shake 0.3s ease;
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* Error tooltip */
 .tooltip {
   position: absolute;
-  left: 0;
-  bottom: calc(100% + 4px);
-  padding: 4px 8px;
-  background: #fff2f0;
-  border: 1px solid #ff4d4f;
-  border-radius: 4px;
-  color: #ff4d4f;
+  left: 4px;
+  bottom: calc(100% + 6px);
+  padding: 5px 10px;
+  background: var(--danger);
+  color: #fff;
   font-size: 12px;
+  font-weight: 500;
   white-space: nowrap;
+  border-radius: var(--radius-sm);
   z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 0.15s ease;
+  pointer-events: none;
 }
 
 .tooltip::after {
   content: '';
   position: absolute;
   top: 100%;
-  left: 16px;
-  border: 4px solid transparent;
-  border-top-color: #ff4d4f;
+  left: 14px;
+  border: 5px solid transparent;
+  border-top-color: var(--danger);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -68,15 +68,15 @@ export function EditableCell({
     [commit, cancel],
   );
 
+  const isIndex = columnKey === 'index';
+
   if (!isEditing) {
-    const displayValue = columnKey === 'index' ? variable.index : String(value);
+    const displayValue = isIndex ? variable.index : String(value);
     return (
       <td
-        className={styles.cell}
+        className={`${styles.cell} ${isIndex ? styles.cellIndex : styles.cellEditable}`}
         onDoubleClick={() => {
-          if (columnKey !== 'index') {
-            onStartEdit();
-          }
+          if (!isIndex) onStartEdit();
         }}
       >
         {displayValue}

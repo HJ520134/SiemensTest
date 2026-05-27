@@ -1,5 +1,8 @@
 .wrapper {
   overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
 }
 
 .table {
@@ -9,45 +12,68 @@
 }
 
 .headerCell {
-  padding: 8px;
+  padding: 10px 12px;
   text-align: left;
   font-weight: 600;
-  font-size: 13px;
-  border-bottom: 2px solid #e8e8e8;
-  background: #fafafa;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  background: var(--bg-hover);
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border-light);
   user-select: none;
 }
 
+.headerCell:first-child {
+  padding-left: 20px;
+}
+
+.headerCell:last-child {
+  padding-right: 20px;
+  border-right: none;
+}
+
 .row {
-  transition: background 0.15s;
+  transition: background 0.12s ease;
+}
+
+.row:nth-child(even) {
+  background: rgba(248, 250, 252, 0.6);
 }
 
 .row:hover {
-  background: #fafafa;
+  background: var(--primary-50);
 }
 
 .rowSelected {
-  background: #e6f7ff;
+  background: var(--bg-selected) !important;
+  box-shadow: inset 3px 0 0 var(--primary);
 }
 
 .rowSelected:hover {
-  background: #e6f7ff;
+  background: var(--primary-50) !important;
 }
 
-.bodyCell {
-  padding: 0;
-  border-bottom: 1px solid #f0f0f0;
+.row:last-child td {
+  border-bottom: none;
 }
 
 .empty {
-  padding: 40px 8px;
+  padding: 52px 20px;
   text-align: center;
-  color: #999;
-  font-size: 13px;
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+
+.emptyIcon {
+  display: block;
+  margin: 0 auto 12px;
+  color: var(--text-disabled);
 }
 
 .colIndex {
-  width: 60px;
+  width: 64px;
 }
 
 .colName {
@@ -55,11 +81,11 @@
 }
 
 .colDataType {
-  width: 100px;
+  width: 110px;
 }
 
 .colDefault {
-  width: 120px;
+  width: 130px;
 }
 
 .colComment {

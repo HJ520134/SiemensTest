@@ -12,6 +12,32 @@ const COL_WIDTHS: Record<string, string> = {
   comment: styles.colComment,
 };
 
+function EmptyState() {
+  return (
+    <tr>
+      <td colSpan={COLUMNS.length} className={styles.empty}>
+        <svg
+          className={styles.emptyIcon}
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M3 9h18M9 3v18" />
+        </svg>
+        No variables defined yet
+        <br />
+        <span style={{ fontSize: 12 }}>Click "Add Row" to create your first variable</span>
+      </td>
+    </tr>
+  );
+}
+
 export function VariableTable() {
   const variables = useVariableStore((s) => s.variables);
   const selectedRowId = useVariableStore((s) => s.selectedRowId);
@@ -36,13 +62,7 @@ export function VariableTable() {
           </tr>
         </thead>
         <tbody>
-          {variables.length === 0 && (
-            <tr>
-              <td colSpan={COLUMNS.length} className={styles.empty}>
-                No variables defined. Click "Add Row" to add one.
-              </td>
-            </tr>
-          )}
+          {variables.length === 0 && <EmptyState />}
           {variables.map((v) => {
             const selected = v.id === selectedRowId;
             return (
@@ -58,7 +78,13 @@ export function VariableTable() {
                     value={String(v[col.key as keyof typeof v] ?? '')}
                     variable={v}
                     isEditing={isEditing(v.id, col.key)}
-                    onCommit={(value) => updateVariable(v.id, col.key as 'name' | 'dataType' | 'defaultValue' | 'comment', value)}
+                    onCommit={(value) =>
+                      updateVariable(
+                        v.id,
+                        col.key as 'name' | 'dataType' | 'defaultValue' | 'comment',
+                        value,
+                      )
+                    }
                     onStartEdit={() => startEdit(v.id, col.key)}
                     onStopEdit={stopEdit}
                   />
